@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASP_NET_Video_Games_API.Controllers
-{
-    // api/games
+{   
+    //api/games
     [Route("api/[controller]")]
     [ApiController]
     public class GamesController : ControllerBase
@@ -25,16 +25,16 @@ namespace ASP_NET_Video_Games_API.Controllers
 
             return Ok(videoGames);
         }
-
+        
         [HttpGet("{id}")]
         public IActionResult GetGamesById(int id)
         {
             int? maxYear = _context.VideoGames.Select(vg => vg.Year).Max();
             int? minYear = _context.VideoGames.Select(vg => vg.Year).Min();
-
-            var videoGames = _context.VideoGames.Where(vg => vg.Id== id);
+            
             return Ok(videoGames);
         }
+        
 
     }
 }
