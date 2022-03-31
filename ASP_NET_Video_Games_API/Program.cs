@@ -10,6 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(opts =>
                    opts.UseSqlServer("server=(localdb)\\MSSQLLocalDB; database=video-games-database; Integrated Security=true",
                    sqlServerOptions => sqlServerOptions.CommandTimeout(400)
@@ -25,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
