@@ -31,7 +31,8 @@ namespace ASP_NET_Video_Games_API.Controllers
         {
             int? maxYear = _context.VideoGames.Select(vg => vg.Year).Max();
             int? minYear = _context.VideoGames.Select(vg => vg.Year).Min();
-            
+            var videoGames = _context.VideoGames.Where(vg => vg.Id == id);
+
             return Ok(videoGames);
         }
         
